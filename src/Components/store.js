@@ -1,6 +1,6 @@
 //bookmarks indexed by id
 let bookmarks = {};
-let error =  new Error('this is message');
+let error =  null;
 let filter = null;
 let mode = 'view';
 let lastExpanded = null;
