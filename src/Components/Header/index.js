@@ -12,11 +12,11 @@ function generateHeaderText (store){
 			<select class="ui button right" id="filter-button" name="filter-dropdown-menu">
 			    <option value="">Filter By:</option>
 			    <optgroup label="Rating:">
-			        <option value="1" class="ui tiny header">1 Star</option>
-			        <option value="2" class="ui tiny header">2 Stars</option>
-			        <option value="3" class="ui tiny header">3 Stars</option>
-			        <option value="4" class="ui tiny header">4 Stars</option>
-			        <option value="5" class="ui tiny header">5 Stars</option>
+			        <option value="1" class="ui tiny header">1+ Stars</option>
+			        <option value="2" class="ui tiny header">2+ Stars</option>
+			        <option value="3" class="ui tiny header">3+ Stars</option>
+			        <option value="4" class="ui tiny header">4+ Stars</option>
+			        <option value="5" class="ui tiny header">5+ Stars</option>
 			    </optgroup>
 			    </optgroup>
 			</select>		</div>
