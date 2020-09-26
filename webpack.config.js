@@ -11,7 +11,7 @@ module.exports = {
 	},
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/docs',
     filename: 'index_bundle.js'
   },
   mode: 'development',
