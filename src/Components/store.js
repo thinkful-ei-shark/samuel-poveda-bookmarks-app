@@ -1,6 +1,6 @@
 //bookmarks indexed by id
 let bookmarks = {};
-let error = null;
+let error =  new Error('this is message');
 let filter = null;
 let mode = 'view';
 let lastExpanded = null;
@@ -10,9 +10,14 @@ export const SELECT_KEY = 'Select';
 export const TITLE_KEY = 'Title';
 export const DESC_KEY = 'Description';
 export const LABEL_KEY = 'Label';
-export const URL_KEY = 'url'
+export const URL_KEY = 'url';
+export const DELETE_KEY = 'delete'
 export function getIdFromKeyElement (idStr, key) {
 	switch (key) {
+		case 'delete':
+		key = DELETE_KEY;
+		break;
+
 		case 'see-less':
 			key = SEE_LESS_KEY;
 		break;
@@ -41,9 +46,12 @@ export function getIdFromKeyElement (idStr, key) {
 }
 
 function correctURL (url) {
-	console.log(url);
 	if (!url.match(/https?:\/\//)) return `https://${url}`;
 		return url;
+}
+
+function dismissError () {
+	this.error = null;
 }
 
 function setFilter (value) {
@@ -83,7 +91,7 @@ function addBookmark (bookmark) {
 }
 
 function deleteBookmark (id) {
-	this.bookmarks = Object.filter(this.store.bookmarks, mark => mark.id !== id);
+	this.bookmarks = Object.filter(this.bookmarks, mark => mark.id !== id);
 }
 
 //only one bookmark should be edited at a time
@@ -141,5 +149,6 @@ export default {
 		getIdFromKeyElement,
 		filterBookmarks,
 		setFilter,
-		correctURL
+		correctURL,
+		dismissError
 }

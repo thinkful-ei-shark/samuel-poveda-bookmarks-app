@@ -1,5 +1,5 @@
 import './BookmarkItem.css'
-import {SEE_LESS_KEY, SELECT_KEY, TITLE_KEY, DESC_KEY, LABEL_KEY, URL_KEY} from 'store';
+import {SEE_LESS_KEY, SELECT_KEY, TITLE_KEY, DESC_KEY, LABEL_KEY, URL_KEY, DELETE_KEY} from 'store';
 
 import $ from 'jquery'
 
@@ -52,7 +52,6 @@ export const generateBookmarkItem = bookmarkObj => {
 	                <div class="ui js-dropdown Dropdown">
 	                    <label class="ui header medium" name="rating-selection" for="${bookmarkObj.id + LABEL_KEY}">Rating:</label>
 	                    <select name="rating" class="ui button js-rating-dropdown rating" id="${bookmarkObj.id + SELECT_KEY}">
-	                        <option value="">No Rating</option>
 	                        <option value="1">1 Star</option>
 	                        <option value="2">2 Stars</option>
 	                        <option value="3">3 Stars</option>
@@ -70,6 +69,7 @@ export const generateBookmarkItem = bookmarkObj => {
 	    <div class="js-expansion bookmark-expansion editing ui container flex">
 	        <textarea id="${bookmarkObj.id + DESC_KEY}" name="desc" class="js-description desc ui small header">${bookmarkObj.desc}</textarea>
 	        <div class="js-expanded-buttons">
+							<button type="reset" id="${bookmarkObj.id + DELETE_KEY}" class="js-delete-button ui red button" name="delete-button">Delete</button>
 	            <a href="#" class="js-cancel-edit-button ui button" name="cancel-edit-button">Cancel</a>
 	            <button class="js-accept-edit-button ui button" name="accept-edit-button">Accept</button>
 	        </div>

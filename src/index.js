@@ -5,7 +5,7 @@ import store from 'store'
 import App from './Components/';
 
 //bookmarks are indexed by their id
-api.getBookMarks()
+api.getBookmarks()
 .then( bookmarks => {
 	bookmarks.forEach( mark => {
 		store.bookmarks[mark.id] = mark;
