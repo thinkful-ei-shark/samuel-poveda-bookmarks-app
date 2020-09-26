@@ -1,0 +1,77 @@
+input, textarea {
+	width: 207px;
+}
+
+div.small.labeled.input {
+	margin-bottom: 8px;
+}
+
+.desc {
+	margin-top: 0px !important;
+}
+
+main .ui.container.flex {
+	margin: auto auto 8px 0 !important;
+}
+
+.Dropdown {
+margin-top: 8px;
+}
+
+div.expanded-buttons {
+padding-top: 21px;
+}
+
+label.flex-one.ui.small.header {
+	margin-bottom: 5px;
+}
+
+.bookmark-expansion.editing {
+	margin-top: 14px !important;
+	margin-bottom: 0 !important;
+}
+
+h3.see-less.ui.header {
+	height: 1.5em;
+	margin-top: 0;
+}
+.bookmark-expanded.ui.segment {
+	margin-bottom: 0;
+}
+
+.ui.segment {
+	margin-bottom: 0;
+}
+
+.bookmark:focus {
+	border: 20px;
+}
+button:hover, .bookmark, .see-less {
+	cursor: pointer;
+}
+
+.ui.rating .icon{
+	font-size: 26px;
+	height: 30px;
+	cursor: default;
+}
+.ui.segment, h3.see-less.ui.header {
+		background-color: #DAB791;
+		border-radius: 0;
+}
+
+.ui.button {
+		background: #fff;
+}
+
+@media all and (min-width: 700px) {
+
+	.flex {
+		display: flex !important;
+		justify-content: space-between;
+	}
+
+	.flex-spaced-between * {
+		flex: 1
+	}
+}
