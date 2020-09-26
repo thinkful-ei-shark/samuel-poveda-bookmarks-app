@@ -7,9 +7,9 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 </head>
 <body>
-    <header class="ui" id="header"></header>
-
-    <main class="ui container centered">
+    <header class="ui centered" id="header"></header>
+    <section id="error"></section>
+    <main class="ui container">
         <section>
             <form  class="js-bookmark-add ui segment hidden" id="add-new-form">
                 <div class="ui container flex">
@@ -19,7 +19,7 @@
                     </div>
                             <div class="ui js-dropdown Dropdown">
                                 <label class="ui header medium" name="rating-selection" for="new-item">Rating:</label>
-                                <select name="rating" class="ui dropdown js-rating-dropdown rating" id="new-item" required>
+                                <select name="rating" class="ui button js-rating-dropdown rating" id="new-item" required>
                                     <option value="">--Select Rating--</option>
                                     <option value="1">1 Star</option>
                                     <option value="2">2 Stars</option>

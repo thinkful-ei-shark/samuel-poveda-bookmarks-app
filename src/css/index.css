@@ -21,6 +21,24 @@ main {
 main section {
 	margin: 14px 0;
 }
+
+#error div.ui.segment.error-message.vertical-flex {
+	color: #fff !important;
+	margin: 20px 15vw auto 15vw;
+	width: 70vw;
+	background-color: #d80b0b !important;
+}
+
+#error div.ui.segment.error-message.vertical-flex h2 {
+	color: #fff;
+	font-style: italic;
+	font-weight: 90;
+}
+
+#error button {
+	margin: 0 46%;
+}
+
 h1.ui.header {
 	color: #6F321F;
 	font-size: 60px;
@@ -75,5 +93,15 @@ button:hover {
 
 	.flex-spaced-between * {
 		flex: 1
+	}
+}
+
+@media all and (max-width: 590px) {
+	div.js-expansion {
+		display: flex;
+		flex-direction: column;
+	}
+	div.js-expansion > * {
+		flex: 1;
 	}
 }

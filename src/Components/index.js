@@ -101,30 +101,84 @@ const onCancelEditClick = (e) => {
 const onAddNewSubmit = () => {
 	$('main').on('submit', '#add-new-form', (e) => {
 		event.preventDefault();
-		let formData = $(e.currentTarget).serializeJson();
+		const form = $('#add-new-form');
+		let formData = form.serializeJson();
 		formData = JSON.parse(formData);
-		formData.url = store.correctURL(formData.url)
-		store.addBookmark(parsedData);
-
+		formData.url = store.correctURL(formData.url);
+		formData = JSON.stringify(formData);
+		console.log(formData);
+		api.addBookmark(formData)
+		.then( bookmark => {
+			store.addBookmark(bookmark);
+			store.defaultViewMode();
+			form.toggleClass('hidden');
+			render();
+		}).catch( e => {
+			store.error = e;
+			render();
+		});
 	});
+}
+
+const onDeleteClick = () => {
+	$('main').on('click', '.js-delete-button', (e) => {
+		e.preventDefault();
+		const idStr = $(e.target).attr('id');
+		const id = store.getIdFromKeyElement(idStr, 'delete');
+		api.deleteBookmark(id)
+		.then( (res) => {
+			store.deleteBookmark(id);
+			render();
+		}).catch( (e) => {
+			store.error = e;
+			render();
+		});
+	})
 }
 
 const onAcceptEditSubmit = () => {
 	$('main').on('submit', 'form.js-bookmark-editing', (e) => {
 		e.preventDefault();
-		console.log('form submitted');
-		const form = $(e.target).closest('form');
+
+		const form = $(e.currentTarget);
 		const id = form.attr('id');
-		const data = form.serializeJson();
-		store.updateBookmark(id, data);
-		store.disableEditing(id);
-		render();
+		let formData = form.serializeJson();
+		formData = JSON.parse(formData);
+		formData.url = store.correctURL(formData.url);
+		formData = JSON.stringify(formData);
+		api.updateBookmark(id, formData).then( res => {
+			store.updateBookmark(id, formData);
+			store.disableEditing(id);
+			render();
+
+		}).catch((e) => {
+			store.error = e;
+			render();
+		});
 	});
 }
 
-
+const onDismissErro = () => {
+	$('#error').on('click', '#dismiss-error', (e) => {
+		store.dismissError();
+		render();
+	})
+}
+//:::::::::::::::::: Render and Error functions :::::::::::::::::::::::::::::::::
+const renderError = () => {
+	const errorEl = $('#error');
+	if(!store.error) return errorEl.empty();
+	const errorMessage = store.error.message;
+	errorEl.html(`
+		<div class="ui segment error-message vertical-flex">
+		<h2 class="ui center aligned header">${errorMessage}</h2>
+	   <button id="dismiss-error"><i class="times icon"></i></button>
+	  </div>
+		`);
+}
 
 const render = () => {
+	renderError();
 	console.log('store on render:',store);
 	const bookmarks = store.filterBookmarks();
 	const header = $('header');
@@ -145,6 +199,8 @@ const initEventHandlers = () => {
 	onEnterSeeLess();
 	onAddNewSubmit();
 	onAddNewCancel();
+	onDeleteClick();
+	onDismissErro();
 }
 
 export default {

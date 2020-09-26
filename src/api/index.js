@@ -2,7 +2,8 @@ const BASE_URL = 'https://thinkful-list-api.herokuapp.com/sam'
 
 const fetchHandler = (...args) => {
 	let error = null;
-	 return fetch(...args).then( response => {
+	console.log(args[1]);
+	 return fetch(args[0], args[1]).then( response => {
 		if (!response.ok) {
 			console.log(response);
 			error = { code: response.status};
@@ -23,29 +24,36 @@ const fetchHandler = (...args) => {
 	});
 }
 
-const getBookMarks = () => {
+const getBookmarks = (data) => {
 	return fetchHandler(`${BASE_URL}/bookmarks`, {
 		headers: {
 			'Content-Type': 'application/json'
-		}
+		},
+		body: data
 	});
 }
 
-const addBookMark = () => {
-
+const addBookmark = (bookmark) => {
+	return fetchHandler(`${BASE_URL}/bookmarks/`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: bookmark
+	})
 }
 
-const updateBookMarks = (id, data) => {
-	return fetchHandler(`${BASE_URL}/bookmarks`, {
+const updateBookmark = (id, data) => {
+	return fetchHandler(`${BASE_URL}/bookmarks/${id}`, {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(data)
+		body: data
 	});
 }
 
-const deleteBookMark = (id) => {
+const deleteBookmark = (id) => {
 	return fetchHandler(`${BASE_URL}/bookmarks/${id}`, {
 		method: 'DELETE',
 		headers: {
@@ -55,7 +63,8 @@ const deleteBookMark = (id) => {
 }
 
 export default {
-	getBookMarks,
-	updateBookMarks,
-	deleteBookMark,
+	getBookmarks,
+	addBookmark,
+	updateBookmark,
+	deleteBookmark,
 }
