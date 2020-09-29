@@ -1,6 +1,4 @@
-# Bookmark App
-
-## [Deployed App](https://thinkful-ei-shark.github.io/samuel-poveda-bookmarks-app/)
+# Bookmarks List App
 
 ## Completed User Stories
 
