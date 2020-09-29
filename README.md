@@ -1,5 +1,12 @@
 # Bookmarks List App
 
+## [Deployed App](https://thinkful-ei-shark.github.io/samuel-poveda-bookmarks-app/)
+
+## About
+
+This app allows the user to manage their selection of bookmarks with a minimal and functional UI.
+Users can add and filter bookmarks from the home screen, and can click on each bookmark to view a link to the site and edit, or delete, the bookmark entry.
+
 ## Completed User Stories
 
 - *I can add bookmarks to my bookmark list.*
