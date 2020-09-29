@@ -24,6 +24,4 @@ function generateHeaderText (store){
 	`;
 }
 
-export default {
-	generateHeaderText
-}
+export default generateHeaderText;

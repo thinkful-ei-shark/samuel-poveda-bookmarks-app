@@ -1,7 +1,7 @@
-import './BookmarkItem.css'
+import './BookmarkItem.css';
 import {SEE_LESS_KEY, SELECT_KEY, TITLE_KEY, DESC_KEY, LABEL_KEY, URL_KEY, DELETE_KEY} from 'store';
 
-import $ from 'jquery'
+import $ from 'jquery';
 
 export const generateBookmarkItem = bookmarkObj => {
 
@@ -10,21 +10,21 @@ export const generateBookmarkItem = bookmarkObj => {
 	if (!bookmarkObj.editable){
 		let ratingIcons = '';
 		if (bookmarkObj.rating) {
-		let counter = bookmarkObj.rating
+		let counter = bookmarkObj.rating;
 //add number of stars based on the rating
 		while (counter > 0) {
 			ratingIcons += `<i class="big star icon"></i>`;
 			counter--;
 		}
 		} else {
-			ratingIcons = '<p class="ui header medium">No rating</p>'
+			ratingIcons = '<p class="ui header medium">No rating</p>';
 	}
 		if (!bookmarkObj.expanded) return `
 	<div class="js-bookmark bookmark ui segment" id="${bookmarkObj.id}" tabindex=0>
 					<h2 class="ui huge header">${bookmarkObj.title}</h2>
 					<div class="ui js-rating rating">${ratingIcons}</div>
 		</div>
-	`
+	`;
 	return `
 	<div class="js-bookmark-expanded bookmark-expanded ui segment" id="${bookmarkObj.id}" tabindex=0>
 	    <div class="ui container flex">
@@ -41,7 +41,7 @@ export const generateBookmarkItem = bookmarkObj => {
 			<hr>
 			<h3 class="js-see-less see-less ui small header centered" id="${bookmarkObj.id + SEE_LESS_KEY}" tabindex=0>${SEE_LESS_KEY}</h3>
 	</div>
-	`
+	`;
 	}
 	return `
 	<form class="js-bookmark-editing bookmark-expanded ui segment" id="${bookmarkObj.id}" tabindex=0>
@@ -75,6 +75,6 @@ export const generateBookmarkItem = bookmarkObj => {
 	        </div>
 	    </div>
 	</form>
-			`
+			`;
 
 }

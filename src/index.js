@@ -11,7 +11,6 @@ api.getBookmarks()
 		store.bookmarks[mark.id] = mark;
 		store.bookmarks[mark.id].expanded = false;
 	});
-	console.log('store:',store.bookmarks);
 	App.render();
 });
 

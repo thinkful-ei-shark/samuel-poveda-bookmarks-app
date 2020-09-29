@@ -1,8 +1,9 @@
 import $ from 'jquery';
+import api from 'api';
 import BookmarkList from './BookmarkList';
 import store from 'store';
 import Header from './Header';
-import api from 'api';
+import RenderNewItemForm from './NewItemForm';
 import { getIdFromKeyElement, SELECT_KEY} from 'store'
 
 $.fn.extend({
@@ -15,12 +16,11 @@ $.fn.extend({
 });
 
 
-//funcs that alter rendering locally ::::::::::::::::::::::::::::::::::::
+//funcs that alter rendering locally :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const onSeeLessClick = () => {
 	$('main').on('click', '.js-see-less', (e) => {
 		const idStr = $(e.currentTarget).attr('id');
-		console.log('idStr:',idStr);
 		const id = getIdFromKeyElement(idStr,'see-less');
 		store.contract(id);
 		render();
@@ -30,7 +30,6 @@ const onSeeLessClick = () => {
 const onBookmarkClick = () => {
 	$('main').on('click', '.js-bookmark', (e) => {
 		const id = $(e.currentTarget).attr('id');
-		console.log(id);
 		store.expand(id);
 		render();
 	});
@@ -46,18 +45,16 @@ const onFilterByChange = () => {
 
 const onAddNewBookmarkClick = () => {
 	$('header').on('click', '#add-new-button', (e) => {
-		$('#add-new-form').toggleClass('hidden');
 		store.enableAdding();
 		render();
-	})
+	});
 }
 
 const onAddNewCancel = () => {
 	$('main').on('click', '#cancel-submit-button', (e) => {
-		$('#add-new-form').toggleClass('hidden');
 		store.defaultViewMode();
 		render();
-	})
+	});
 }
 
 
@@ -66,7 +63,7 @@ const onEnterBookmark = () => {
 		if (e.keyCode === 13) {
 			$(e.currentTarget).click();
 		}
-	})
+	});
 }
 
 const onEnterSeeLess = () => {
@@ -83,14 +80,12 @@ const onEditClick = () => {
 		if(store.mode === 'add') $('#cancel-submit-button').click();
 		store.enableEditing(id);
 		render();
-		$(`#${id + SELECT_KEY}`).find(`option[value="${store.bookmarks[id].rating}"]`).prop('selected',true);
 	});
 }
 
 const onCancelEditClick = (e) => {
 	$('main').on('click', '.js-cancel-edit-button', e =>{
 		e.preventDefault();
-		console.log('cancel evt');
 		const id = $(e.target).closest('form').attr('id');
 		store.disableEditing(id);
 		render();
@@ -106,7 +101,6 @@ const onAddNewSubmit = () => {
 		formData = JSON.parse(formData);
 		formData.url = store.correctURL(formData.url);
 		formData = JSON.stringify(formData);
-		console.log(formData);
 		api.addBookmark(formData)
 		.then( bookmark => {
 			store.addBookmark(bookmark);
@@ -133,7 +127,7 @@ const onDeleteClick = () => {
 			store.error = e;
 			render();
 		});
-	})
+	});
 }
 
 const onAcceptEditSubmit = () => {
@@ -162,7 +156,7 @@ const onDismissErro = () => {
 	$('#error').on('click', '#dismiss-error', (e) => {
 		store.dismissError();
 		render();
-	})
+	});
 }
 //:::::::::::::::::: Render and Error functions :::::::::::::::::::::::::::::::::
 const renderError = () => {
@@ -179,12 +173,12 @@ const renderError = () => {
 
 const render = () => {
 	renderError();
-	console.log('store on render:',store);
 	const bookmarks = store.filterBookmarks();
 	const header = $('header');
-	const mainBookmarks = $('#bookmarks-list');
-	header.html(Header.generateHeaderText(store));
-	mainBookmarks.html(BookmarkList.generateBookmarkList(bookmarks));
+	const mainBookmarks = $('main');
+	let toBeRenderedOnMain = RenderNewItemForm()+ BookmarkList(bookmarks);
+	header.html(Header(store));
+	mainBookmarks.html(toBeRenderedOnMain);
 }
 
 const initEventHandlers = () => {

@@ -2,10 +2,8 @@ const BASE_URL = 'https://thinkful-list-api.herokuapp.com/sam'
 
 const fetchHandler = (...args) => {
 	let error = null;
-	console.log(args[1]);
 	 return fetch(args[0], args[1]).then( response => {
 		if (!response.ok) {
-			console.log(response);
 			error = { code: response.status};
 			if (!response.headers.get('Content-Type').includes('json')) {
 				error.message = response.statusText;

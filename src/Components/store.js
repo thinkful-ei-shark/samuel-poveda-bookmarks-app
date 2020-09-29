@@ -42,7 +42,7 @@ export function getIdFromKeyElement (idStr, key) {
 		key = URL_KEY;
 	}
 
-	return idStr.substring(0, idStr.length - key.length)
+	return idStr.substring(0, idStr.length - key.length);
 }
 
 function correctURL (url) {
@@ -127,7 +127,6 @@ function validateAndDisableAdding () {
 
 function updateBookmark (id, data) {
 	data = JSON.parse(data);
-	console.log('updata data', data);
 	Object.assign(this.bookmarks[id], data);
 }
 

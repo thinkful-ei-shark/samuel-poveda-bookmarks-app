@@ -9,6 +9,4 @@ const generateBookmarkList = (bookmarks) => {
 
 
 
-export default {
-	generateBookmarkList
-}
+export default generateBookmarkList;
